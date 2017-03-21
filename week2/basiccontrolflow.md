@@ -72,7 +72,8 @@ for day in a:
 	    print day + ", first day of the working week"
     elif day == "Friday":
 	    print day + ", last day of the working week"
-    else: print day
+    else:
+        print day
 ```
 ---
 # Conditional expressions
