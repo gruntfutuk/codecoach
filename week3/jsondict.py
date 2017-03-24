@@ -12,11 +12,8 @@ for arg in sys.argv:
 
 # check if file is empty by trying to read it; there are better ways
 f = open('hw3.json', 'r')
-if f.readline() == '':
-    emptyfile = True
-else:
-    emptyfile = False
-f.close()  # could reset but this is all we know for now
+emptyfile = f.readline() == ''
+f.close()
 
 # if the file is empty, create list, add dictionary
 if emptyfile:
