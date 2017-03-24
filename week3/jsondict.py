@@ -14,7 +14,7 @@ arglist = []  # new list to hold dictionary of args
 
 # check if file is empty by trying to read it; there are better ways
 f = open('hw3.json', 'r')
-if f.readline() != '':         # will be True if file is empty
+if f.readline() != '':         # if line isn't null, file is not empty
     f.close()                  # close it so can re-opon at start
     f = open('hw3.json', 'r')  # open file again, at start
     arglist = json.load(f)     # read previously saved list of arg dictionaries
