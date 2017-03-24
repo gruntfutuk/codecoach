@@ -3,16 +3,13 @@
 
 f = open('example.txt', 'r')  # f is a file handler
 
-# first version printed line by line (note: intermediate lines are just
-# are just empty other than newline characters). Lines are long and
-# will probably wrap on the screen, but there are still one line in
-# the file
-
+# to print entire file, could simply say
+# print(f.read())
+# or print in a for loop each line using
 # print(f.readline())
 
-# second version uses for loop to print entire file, with
-# line numbers, and ignoring blank lines
-
+# print entire file, with line numbers
+# ignoring blank lines
 x = 1  # initialise counter, so can print number of each line
 for line in f:
     if line != "\n":  # ignore lines that are empty but for newline character
