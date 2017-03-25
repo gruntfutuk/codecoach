@@ -3,20 +3,25 @@
 import sys   # so I can read command line arguments
 import json  # so I can read/write data/files in JSON format
 
+dictFile = 'hw3.json'  # name of file to store dictionary of args
+argKeys = ['scriptname', 'firstname', 'lastname',
+           'genderid', 'location', 'status', 'misc']  # key names for args
+
 # first, add command line arguments to a new dictionary
 args = {}     # create empty dictionary to add command lines args to
-counter = 0   # initialise counter, so we can reference key value pairs
-for arg in sys.argv:
-    args[counter] = arg  # append key value pair using arg position as key
-    counter += 1
-
+for counter, arg in enumerate(sys.argv):
+    if counter < len(argKeys):
+        args[argKeys[counter]] = arg  # append key value pairs
+    else:
+        print('Excess arguments ignored.')
+        break
 arglist = []  # new list to hold dictionary of args
 
 # check if file is empty by trying to read it; there are better ways
-f = open('hw3.json', 'r')
+f = open(dictFile, 'r')
 if f.readline() != '':         # if line isn't null, file is not empty
     f.close()                  # close it so can re-opon at start
-    f = open('hw3.json', 'r')  # open file again, at start
+    f = open(dictFile, 'r')  # open file again, at start
     arglist = json.load(f)     # read previously saved list of arg dictionaries
 f.close()                      # close file so can reopen for overwrite
 
@@ -24,7 +29,7 @@ f.close()                      # close file so can reopen for overwrite
 arglist.append(args)           # add new arguments dictionary to list
 
 # write latest version of list of dictionaries to file
-f = open('hw3.json', 'w')
+f = open(dictFile, 'w')
 j = json.dump(arglist, f)      # write (or overwrite previous) dictionary list
 
 # all done
