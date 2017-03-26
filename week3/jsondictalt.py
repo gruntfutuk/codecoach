@@ -17,8 +17,10 @@ argKeys = ['scriptname', 'firstname', 'lastname',
 # function to do the bulk of the work of the programme
 def addArgs(f):
     # first, add command line arguments to a new dictionary
-    if len(sys.argv) > len(argKeys): print('Excess arguments ignored.')
-    args = dict(zip(argKeys, sys.argv))
+    args = dict(zip(argKeys, sys.argv))  # add with matching keys by position
+    # add any excess arguments as a list
+    if len(sys.argv) > len(argKeys):
+        args['unusedargs'] = sys.argv[len(argKeys):]
 
     # retrieve any stored dictionary list of command line arguments
     if os.stat(dictFile).st_size > 0:
