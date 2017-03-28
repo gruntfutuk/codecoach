@@ -12,8 +12,8 @@ match       = "Lane"
 
 # build the data query - could consider making these arguments :-)
 queryurl    = 'http://data.police.uk/api/crimes-street/all-crime'
-lattitude   = 'lat=52.651725'
-longitude   = 'lng=-2.485432'
+lattitude   = 'lat=52.6636442'
+longitude   = 'lng=-2.4438707'
 date        = 'date=2017-01'
 querystring = queryurl + "?" + lattitude + "&" + longitude + "&" + date
 

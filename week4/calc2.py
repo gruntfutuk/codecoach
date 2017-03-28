@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 # week 4
 
 # functions alternative calculator function
