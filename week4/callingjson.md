@@ -15,10 +15,11 @@ urllib2 module to provide HTTP functions.
 ```
 import urllib2, json
 response = urllib2.urlopen(‘https:// http://data.police.uk/api/crimes-street/all-
-crime?lat=52.629729&lng=-1.131592&date=2011-08’) json_data = response.read()
+crime?lat=52.629729&lng=-1.131592&date=2011-08’)
+json_data = response.read()
 crime_data = json.loads(json_data)
 for crime in crime_data:
-print crime["category"] + " in " + crime["location"]["street"]["name"]
+    print crime["category"] + " in " + crime["location"]["street"]["name"]
 ```
 The above example pulls the JSON file from the URL specified and
 reads it into a string variable called json_data. We then convert
