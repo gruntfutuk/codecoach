@@ -7,8 +7,8 @@ pass in different values according to the needs of your program at
 that particular time.  To define a function you use the def keyword
 ```
 def SumNums (x,y):
-result = int(x) + int(y)
-return result
+    result = int(x) + int(y)
+    return result
 
 
 print SumNums(5,10)
@@ -23,8 +23,9 @@ indented to show they are part of the function.  You can also give
 a function a default value. In this case if the argument is not
 given in the calling statement the default value will be given.
 ```
-def SumNums (x,y = 20): result = int(x) + int(y)
-return result
+def SumNums (x,y = 20):
+    result = int(x) + int(y)
+    return result
 
 
 print SumNums(5)
