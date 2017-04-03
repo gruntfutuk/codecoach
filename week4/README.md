@@ -16,5 +16,19 @@ The script `crime.py` loads UK Police crime data (public repository) for a
 particular area, coverts that to a Dictionary using the JSON module, and prints
 selected data out.
 
+## Homework
+Added an app called `weather.py` and `setup.py` (the latter for packaging)
+that uses the `Open Weather Map` data source to print a report on the
+weather or a named city. (Whilst it fulfils the homework objective, it uses
+techniques not covered in the classes and might be too advanced for some
+people. It also does not written elegantly.)
 
-## Notes and homework to follow.
+### Command Line
+It uses command line arguments, and the `click` module to handle the arguments,
+to provide lots of options and help text.
+
+### JSON & API
+It uses the `requests` module to get the data from Open Weather Map. Note
+that an API key is required, which is free but requires registration. The
+requests module returns a JSON structure (which is the default response
+anyway from Open Weather Map).
