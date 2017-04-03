@@ -31,8 +31,11 @@ import click
 @click.option('--wind/--no-wind', '-w/-no-w', 'wind',
               default=False,
               help='Output wind speed (and direction, if known)')
+@click.option('--id/--no-id', 'id', default=False,
+              help='Provide city id rather than name')
 @click.argument('place', metavar='city')
-def cli(place, summary, detail, temp, pressure, humidity, temprange, wind):
+def cli(place, summary, detail, temp, pressure,
+        humidity, temprange, wind, id):
     """
     Weather app using Open Weather Map
 
@@ -53,14 +56,18 @@ def cli(place, summary, detail, temp, pressure, humidity, temprange, wind):
     args['humidity'] = humidity
     args['temprange'] = temprange
     args['wind'] = wind
+    args['id'] = id
     main(args)
 
 
 # build the data query - could consider making these arguments :-)
 def checkweather(key, args):
     queryurl = 'http://api.openweathermap.org/data/2.5/weather'
-    querytype = 'q'
-    city = args['place']
+    if args['id']:
+        querytype = 'id'
+    else:
+        querytype = 'q'
+    city = args['place']  # name of city or cityid if -id option used
     query = city + "&format=json" + "&units=metric"
     apikey = "appid=" + key
     querystring = queryurl + "?" + querytype + "=" + query + "&" + apikey
@@ -70,6 +77,16 @@ def checkweather(key, args):
 
 
 def reportweather(weather, args):
+    code = int(weather['cod'])
+    if code == 400:
+        print('Location supplied not recognised. Error {}.'
+              .format(weather['cod']))
+        return
+    if code != 200:
+        print('Sorry. Got error back from Open Weather Map: Error >>{}<<.'
+              .format(weather['cod']))
+        return
+
     print('Weather report for: {} (closest to {} with weather info).'
           .format(weather['name'], args['place']))
     if args['summary']:
