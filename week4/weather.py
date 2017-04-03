@@ -33,9 +33,12 @@ import click
               help='Output wind speed (and direction, if known)')
 @click.option('--id/--no-id', 'id', default=False,
               help='Provide city id rather than name')
+@click.option('--full/--not-full', '-f/-not-f', 'full',
+              default=False,
+              help='Provide full details.')
 @click.argument('place', metavar='city')
 def cli(place, summary, detail, temp, pressure,
-        humidity, temprange, wind, id):
+        humidity, temprange, wind, full, id):
     """
     Weather app using Open Weather Map
 
@@ -48,14 +51,14 @@ def cli(place, summary, detail, temp, pressure,
     """
     click.echo('Welcome to the weather app')
     args = {}
-    args['place'] = place
-    args['summary'] = summary
-    args['detail'] = detail
-    args['temp'] = temp
-    args['pressure'] = pressure
-    args['humidity'] = humidity
-    args['temprange'] = temprange
-    args['wind'] = wind
+    args['place'] = place or full
+    args['summary'] = summary or full
+    args['detail'] = detail or full
+    args['temp'] = temp or full
+    args['pressure'] = pressure or full
+    args['humidity'] = humidity or full
+    args['temprange'] = temprange or full
+    args['wind'] = wind or full
     args['id'] = id
     main(args)
 
