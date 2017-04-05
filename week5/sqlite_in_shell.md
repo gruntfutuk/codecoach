@@ -1,9 +1,11 @@
 # WEEK 5 class
 
-Introduction to sqlite for the creation and manipulation of databases. Sqlite
+Introduction to `sqlite` for the creation and manipulation of databases. Sqlite
 is the most widely used database system in the world (probably the most used
 application overall) as it is included on all Android and iPhones as well as
-many other devices. It is lite in the sense that it is a small, fast and powerful
+many other devices including in highly regulated environments where integrity and stability are key.
+
+It is lite in the sense that it is a small, fast and powerful
 application that is usually embedded into applications/systems rather than
 because it lacks capabilities.
 
@@ -11,11 +13,11 @@ It contrasts with traditional relation database management systems (RDBMS) that
 required a *client - server* setup, where the database system typically runs on
 a different computer server from the *client* application using the database.
 
-Unlike RDBMS offering like Oracle, DB2, SQLServer, mysql, etc., sqlite does not
+Unlike RDBMS offering such as Oracle, DB2, SQLServer, mysql, etc., sqlite does not
 include any user management or access permissions, and only supports one writer
 at a time. Whilst it is suitable for running small websites that need read only
 for all but the content manager of the site, it is generally not suitable for
-multi-user applications.
+multi-user applications. A sqlite database is stored in one file, which is highly portable.
 
 sqlite is a much better alternative to *database by files* (which is an
 application storing its own data in a collection of files to represent
@@ -39,13 +41,14 @@ e.g. `OPEN mydatabase.db` but this will lose anything done in session so far.
 
 sqlite myFirstDatabase.db
 
-INSERT INTO users(firstName, surName) values ('John','Smith');
-INSERT INTO users(firstName, surName) values ('Fred','Blogs');
+CREATE TABLE users(firstName TEXT, surName TEXT);
+INSERT INTO users(firstName, surName) VALUES ('John','Smith');
+INSERT INTO users(firstName, surName) VALUES ('Fred','Blogs');
 
 SELECT oid, * from users;
 
-INSERT INTO users(firstName, surName) values ('Fred','Blogs');
-INSERT INTO users(firstName, surName) values ('Wendy','Blogs');
+INSERT INTO users(firstName, surName) VALUES ('Fred','Blogs');
+INSERT INTO users VALUES ('Wendy','Blogs');
 
 select oid, * from users;
 
@@ -67,10 +70,10 @@ select oid, * from users;
 CREATE TABLE cars(make text, model text, colour text, userid integer);
 .schema
 
-INSERT INTO cars (make, model, colour, userid) values ('Mercedes','S-Class', 'silver',1);
-INSERT INTO cars (make, model, colour, userid) values ('Skoda','Octavia Estate', 'blue',2);
-INSERT INTO cars (make, model, colour, userid) values ('BMW','Series 5', 'blue',3);
-INSERT INTO cars (make, model, colour, userid) values ('BMW','Series 3', 'green',2);
+INSERT INTO cars (make, model, colour, userid) VALUES ('Mercedes','S-Class', 'silver',1);
+INSERT INTO cars (make, model, colour, userid) VALUES ('Skoda','Octavia Estate', 'blue',2);
+INSERT INTO cars (make, model, colour, userid) VALUES ('BMW','Series 5', 'blue',3);
+INSERT INTO cars (make, model, colour, userid) VALUES ('BMW','Series 3', 'green',2);
 
 SELECT oid, * from cars;
 
