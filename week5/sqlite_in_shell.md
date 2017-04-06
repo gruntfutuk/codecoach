@@ -1,9 +1,11 @@
 # WEEK 5 class
 
-Introduction to `sqlite` for the creation and manipulation of databases. Sqlite
-is the most widely used database system in the world (probably the most used
-application overall) as it is included on all Android and iPhones as well as
-many other devices including in highly regulated environments where integrity and stability are key.
+Introduction to `sqlite` for the creation and manipulation of
+databases. Sqlite is the most widely used database system in the
+world (probably the most used application overall) as it is included
+on all Android and iPhones as well as many other devices including
+in highly regulated environments where integrity and stability are
+key.
 
 It is lite in the sense that it is a small, fast and powerful
 application that is usually embedded into applications/systems rather than
@@ -37,71 +39,19 @@ will be transitory and only exist for the duration of the sqlite session.
 A file can be opened (created) from within sqlite using the `.OPEN` command,
 e.g. `OPEN mydatabase.db` but this will lose anything done in session so far.
 
-## Example session (this shows the commands only, not the responses)
+SQL statements need to end with a semi-colon `;`.
 
-sqlite myFirstDatabase.db
+Note that sqlite is case insensitivei, other than for the content of text
+fields, but by convention SQL commands are usually written in upppercase. In
+addition, sqlite has some commands of its own that are preceded by a `.` and
+these do need to be in lowercase and do not end with a semi-colon.
 
-CREATE TABLE users(firstName TEXT, surName TEXT);
-INSERT INTO users(firstName, surName) VALUES ('John','Smith');
-INSERT INTO users(firstName, surName) VALUES ('Fred','Blogs');
+## Example sqlite session
+Created a file, example.sql, that can be used to create a new database and add
+make various changes, based on what was done in the week 5 class.
 
-SELECT oid, * from users;
+Invoke with the command: `sqlite3 test.db < example.sql`
 
-INSERT INTO users(firstName, surName) VALUES ('Fred','Blogs');
-INSERT INTO users VALUES ('Wendy','Blogs');
-
-select oid, * from users;
-
-update users set gender=male where oid=1;
-update users set gender='male' where oid=1;
-
-select oid, * from users;
-
-update users set gender='Male' where oid=2;
-update users set gender='Male' where oid=3;
-update users set gender='Female' where oid=4;
-
-select oid, * from users;
-
-delete from users where oid=3;
-
-select oid, * from users;
-
-CREATE TABLE cars(make text, model text, colour text, userid integer);
-.schema
-
-INSERT INTO cars (make, model, colour, userid) VALUES ('Mercedes','S-Class', 'silver',1);
-INSERT INTO cars (make, model, colour, userid) VALUES ('Skoda','Octavia Estate', 'blue',2);
-INSERT INTO cars (make, model, colour, userid) VALUES ('BMW','Series 5', 'blue',3);
-INSERT INTO cars (make, model, colour, userid) VALUES ('BMW','Series 3', 'green',2);
-
-SELECT oid, * from cars;
-
-SELECT u.firstName, u.surName, c.make, c.model, c.colour from users as u, cars as c;
-SELECT u.firstName, u.surName, c.make, c.model, c.colour from users as u, cars as c where c.userid=u.userid;
-SELECT u.firstName, u.surName, c.make, c.model, c.colour from users as u, cars as c where c.userid=u.oid;
-
-UPDATE users set userid=3 where userid=3;
-UPDATE cars set userid=3 where userid=3;
-
-SELECT u.firstName, u.surName, c.make, c.model, c.colour from users as u, cars as c where c.userid=u.oid;
-
-SELECT oid,* from cars;
-
-UPDATE cars set userid=4 where userid=3;
-
-SELECT oid,* from cars;
-
-SELECT u.firstName, u.surName, c.make, c.model, c.colour from users as u, cars as c where c.userid=u.oid;
-
-ALTER TABLE cars ADD COLUMN age integer;
-ALTER TABLE cars ADD COLUMN miles integer;
-UPDATE cars SET age=2 WHERE oid<2;
-
-SELECT oid,* FROM cars;
-
-INSERT INTO cars(make, model, colour, age, miles, userid) VALUES ('Ford','Fiesta','Black',5,32846,1);
-INSERT INTO cars(make, model, colour, age, miles, userid) VALUES ('VW','Polo','Brown',6,22372,4);
-
-.HEADERS on
-.EXIT
+Note: The test.db - or whatever name you choose - should not exist when you
+invoke the script, or at least, should not contain the tables `users` and
+`cars` or the script will suffer from errors.
